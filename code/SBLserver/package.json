@@ -1,6 +1,6 @@
 {
-  "name": "server",
-  "description": "A simple server for SBL mobile application",
+  "name": "SBLserver",
+  "description": "A simple server for SBL",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
