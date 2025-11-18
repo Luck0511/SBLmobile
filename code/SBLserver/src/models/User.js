@@ -32,7 +32,8 @@ User.init(
         },
         is_active: {
             type: DataTypes.BOOLEAN,
-            allowNull: false
+            allowNull: false,
+            defaultValue: true
         },
         created_at: {
             type: DataTypes.DATE
