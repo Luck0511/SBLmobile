@@ -1,0 +1,1 @@
+//junction db table for 'book' and 'shelf'

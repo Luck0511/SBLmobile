@@ -1,0 +1,1 @@
+//model class for user's db table

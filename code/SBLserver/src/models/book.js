@@ -1,0 +1,1 @@
+//model class for book's db table

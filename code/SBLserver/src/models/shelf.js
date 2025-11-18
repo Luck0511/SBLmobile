@@ -1,0 +1,1 @@
+//model class for shelf's db table
