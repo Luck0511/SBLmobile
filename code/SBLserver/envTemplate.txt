@@ -1,0 +1,29 @@
+# environment variables for local development
+
+# APP
+NODE_ENV=
+PORT=
+HOST=localhost
+APP_URL=
+
+# Database
+DB_DATABASE=
+DB_DIALECT=
+DB_URI=
+DB_HOST=
+DB_PORT=
+DB_USERNAME=
+DB_PASSWORD=
+DB_LOGGING=f
+
+DB_POOL_MAX=10
+DB_POOL_MIN=0
+DB_POOL_ACQUIRE=30000
+DB_POOL_IDLE=10000
+
+# Security (JWT+bcrypt)
+JWT_SECRET=
+     # 7 days jwt and cookies expiration
+JWT_EXPIRES_IN=7d
+COOKIE_MAX_AGE=604800000
+BCRYPT_ROUNDS=12
