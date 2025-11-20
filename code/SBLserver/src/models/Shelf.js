@@ -10,7 +10,8 @@ import {DataTypes, Model} from "sequelize";
 export class Shelf extends Model {
 }
 
-Shelf.init({
+Shelf.init(
+    {
         shelfID: {
             type: DataTypes.INTEGER,
             primaryKey: true,
