@@ -11,7 +11,7 @@ import {User} from "./User.js";
 import {UserBook} from "./User_book.js";
 import {defineAssociations} from "./association.js";
 
-//objet with all models and sequelize
+//object with all models and sequelize
 export const database = {
     sequelize,
     Book,
