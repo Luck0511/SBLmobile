@@ -1,4 +1,5 @@
-package com.itlvck.sblmobile;
+/*
+package com.itlvck.sblmobile.fragment;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,8 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 
-public class RegisterActivity extends AppCompatActivity {
+import com.itlvck.sblmobile.R;
+
+public class RegisterFragment extends Fragment {
     //Variables
     private EditText username;
     private EditText password;
@@ -23,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.register);
+        setContentView(R.layout.fragment_register);
 
         //Initialisation variables
         username=findViewById(R.id.registerUsername);
@@ -68,3 +72,4 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 }
+*/
