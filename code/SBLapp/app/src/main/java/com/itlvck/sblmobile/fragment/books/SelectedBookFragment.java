@@ -1,4 +1,4 @@
-package com.itlvck.sblmobile.fragment;
+package com.itlvck.sblmobile.fragment.books;
 
 import androidx.fragment.app.Fragment;
 
