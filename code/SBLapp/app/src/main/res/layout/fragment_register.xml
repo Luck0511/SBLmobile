@@ -1,80 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/register"
-    tools:context=".fragment.RegisterFragment"
-    >
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
-    <LinearLayout
+    <TextView
+        android:text="REGISTRATI"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        >
-        <ImageView
-            android:contentDescription="Logo"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="32dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/logo_title_logo"
-            />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="24sp" />
 
-        <TextView
-            android:text="REGISTRATI"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:gravity="center"
-            android:textStyle="bold"
+    <EditText
+        android:hint="Username"
+        android:id="@+id/registerUsername"
+        android:layout_width="320dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="16dp"
+        android:paddingStart="16dp"
+        android:inputType="text"
+        android:drawableStart="@drawable/user_icon" />
 
-            />
+    <EditText
+        android:hint="Password"
+        android:id="@+id/registerPassword"
+        android:layout_width="320dp"
+        android:paddingStart="16dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="16dp"
+        android:inputType="textPassword"
+        android:drawableStart="@drawable/password_icon" />
 
-        <EditText
-            android:hint="Username"
-            android:id="@+id/registerUsername"
-            android:layout_width="320dp"
-            android:layout_height="56dp"
-            android:layout_marginBottom="16dp"
-            android:paddingStart="16dp"
-            android:inputType="text"
-            android:drawableStart="@drawable/user_icon"
-            />
+    <EditText
+        android:hint="Conferma Password"
+        android:id="@+id/registerConfirmPassword"
+        android:layout_width="320dp"
+        android:paddingStart="16dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="16dp"
+        android:inputType="textPassword"
+        android:drawableStart="@drawable/password_icon" />
 
-        <EditText
-            android:hint="Password"
-            android:id="@+id/registerPassword"
-            android:layout_width="320dp"
-            android:paddingStart="16dp"
-            android:layout_height="56dp"
-            android:layout_marginBottom="16dp"
-            android:inputType="textPassword"
-            android:drawableStart="@drawable/password_icon"
-            />
+    <Button
+        android:text="Registrati"
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-        <EditText
-            android:hint="Conferma Password"
-            android:id="@+id/registerConfirmPassword"
-            android:layout_width="320dp"
-            android:paddingStart="16dp"
-            android:layout_height="56dp"
-            android:layout_marginBottom="16dp"
-            android:inputType="textPassword"
-            android:drawableStart="@drawable/password_icon"
-            />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sei già registrato?"
+        android:padding="8dp" />
 
-        <Button
-            android:text="Registrati"
-            android:id="@+id/btnRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+    <TextView
+        android:id="@+id/GoToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accedi"
+        android:textColor="?attr/colorPrimary"
+        android:clickable="true"
+        android:focusable="true" />
 
-
-    </LinearLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
