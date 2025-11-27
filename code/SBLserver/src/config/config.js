@@ -20,13 +20,11 @@ export const appConfig = {
         password: process.env.DB_PASSWORD || '1234',
         db_uri: process.env.DB_URI || null,
         host: process.env.HOST || 'localhost',
-        port: process.env.PORT || 3306,
+        port: process.env.DB_PORT || 3306,
         dialect: process.env.DB_DIALECT || 'mysql', //mysql (dev and prod?)
         logging:
         console.log,
         pool: {
-            max: process.env.DB_POOL_MAX || 5,
-            min: process.env.DB_POOL_MIN || 0,
             acquire: process.env.DB_POOL_ACCURRENCY || 30000,
             idle: process.env.DB_POOL_IDLE || 30000
         },

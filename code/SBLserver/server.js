@@ -4,11 +4,16 @@ dotenv.config();
 
 import {server} from './src/app.js';
 import {appConfig} from "./src/config/config.js";
+import {testConnection} from "./src/config/dbConfig.js";
 
 const startServer = async () => {
     try{
         //SERVER STARTUP ROUTINE
         console.log("======starting server=======");
+
+        //test connection to database
+        await testConnection();
+        console.log('✅ Database checks ended');
 
         //start server
         server.listen(appConfig.app.port, ()=>{
