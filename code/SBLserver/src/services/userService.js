@@ -63,7 +63,7 @@ export const registerNewUser = async (userName, password) => {
             return {opStatus: 409} //{message: 'An User with this name already exists'};
         }else {
             const {User} = database;
-            const hashedPassword = await passwordHash(password)
+            const hashedPassword = await passwordHash(password);
             const newUser = await User.create({username: userName, password: hashedPassword});
             return {opStatus: 200, newUser: newUser}
             //{message: 'User profile created successfully', userInfo: newUser});

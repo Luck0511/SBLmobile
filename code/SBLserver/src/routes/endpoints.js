@@ -54,7 +54,7 @@ router.post('/register', async (req, res) => {
                 message: 'User profile created successfully',
                 userInfo: {
                     id: newUser.get('userID'),
-                    playerName: newUser.get('userName'),
+                    playerName: newUser.get('username'),
                 }
             });
         }

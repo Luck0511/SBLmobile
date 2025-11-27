@@ -1,5 +1,6 @@
 //dotenv loader import
 import dotenv from 'dotenv';
+import {getNumericEnv, getRequiredEnv} from "../utils/envHelpers.js";
 dotenv.config();
 
 //application config
@@ -7,26 +8,28 @@ export const appConfig = {
     //Application config options --> contains essential app/server settings
     app: {
         name: 'SBL_server',
-        env: process.env.NODE_ENV || 'development',
-        port: process.env.PORT || 3000,
+        env: getRequiredEnv('NODE_ENV'),
+        port: getNumericEnv('PORT', 3000),
         host: process.env.HOST || 'localhost',
-        url: process.env.APP_URL || `http://localhost:${process.env.PORT || 3000}`,
+        url: process.env.APP_URL || `http://localhost:${getNumericEnv('PORT', 3000)}`,
     },
 
-    //Database config options/setting
+    //Database config options
     database: {
-        database: process.env.DB_DATABASE || 'sbl_db',
-        username: process.env.DB_USERNAME || 'root',
-        password: process.env.DB_PASSWORD || '1234',
+        database: getRequiredEnv('DB_DATABASE'),
+        username: getRequiredEnv('DB_USERNAME', 'root'),
+        password: getRequiredEnv('DB_PASSWORD'),
         db_uri: process.env.DB_URI || null,
-        host: process.env.HOST || 'localhost',
-        port: process.env.DB_PORT || 3306,
-        dialect: process.env.DB_DIALECT || 'mysql', //mysql (dev and prod?)
+        host: getRequiredEnv('DB_HOST'),
+        port: getNumericEnv('DB_PORT', 3306),
+        dialect: getRequiredEnv('DB_DIALECT', 'mysql'), //mysql (dev), postgres (prod)
         logging:
         console.log,
         pool: {
-            acquire: process.env.DB_POOL_ACCURRENCY || 30000,
-            idle: process.env.DB_POOL_IDLE || 30000
+            max: getNumericEnv('DB_POOL_MAX', 5),
+            min: getNumericEnv('DB_POOL_MIN', 0),
+            acquire: getNumericEnv('DB_POOL_ACQUIRE', 30000),
+            idle: getNumericEnv('DB_POOL_IDLE', 10000)
         },
         define: {
             timestamps: true, // adds createdAt and updatedAt
@@ -37,9 +40,9 @@ export const appConfig = {
 
     //Authentication and security
     auth: {
-        jwtSecret: process.env.JWT_SECRET,
-        jwtExpires: process.env.JWT_EXPIRES_IN || '7d',
-        cookieMaxAge: process.env.COOKIE_MAX_AGE || 604800000, //1 day
-        bcryptRounds: process.env.BCRYPT_ROUNDS || 12,
+        jwtSecret: getRequiredEnv('JWT_SECRET'),
+        jwtExpires: getRequiredEnv('JWT_EXPIRES_IN'),
+        cookieMaxAge: getNumericEnv('COOKIE_MAX_AGE', 86400000), //1 day
+        bcryptRounds: getNumericEnv('BCRYPT_ROUNDS', 12)
     }
 };
