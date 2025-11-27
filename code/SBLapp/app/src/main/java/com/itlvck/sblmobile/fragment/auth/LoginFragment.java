@@ -24,9 +24,9 @@ public class LoginFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
 
         //Here it goes the layout of the fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
