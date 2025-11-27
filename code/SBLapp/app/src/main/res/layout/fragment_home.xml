@@ -7,13 +7,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:contentDescription="logoImage"
-        android:src="@drawable/logo_title_logo"
-        android:layout_marginTop="16dp"
-        tools:ignore="HardcodedText" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
