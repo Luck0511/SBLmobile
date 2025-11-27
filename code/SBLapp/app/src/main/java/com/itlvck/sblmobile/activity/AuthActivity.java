@@ -10,7 +10,7 @@ public class AuthActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_auth);
+        setContentView(R.layout.activity_auth);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager()
@@ -20,3 +20,4 @@ public class AuthActivity extends AppCompatActivity {
         }
     }
 }
+

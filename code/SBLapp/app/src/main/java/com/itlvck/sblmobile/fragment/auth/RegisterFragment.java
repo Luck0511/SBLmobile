@@ -1,17 +1,16 @@
-/*
-package com.itlvck.sblmobile.fragment;
+
+package com.itlvck.sblmobile.fragment.auth;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.itlvck.sblmobile.R;
@@ -23,34 +22,28 @@ public class RegisterFragment extends Fragment {
     private EditText confirmPassword;
     private Button btnRegister;
 
+    public RegisterFragment(){}
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.fragment_register);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        //Here it goes the layout of the fragment
+        View view = inflater.inflate(R.layout.fragment_register, container, false);
 
         //Initialisation variables
-        username=findViewById(R.id.registerUsername);
-        password=findViewById(R.id.registerPassword);
-        confirmPassword=findViewById(R.id.registerConfirmPassword);
-        btnRegister=findViewById(R.id.btnRegister);
+        username=view.findViewById(R.id.registerUsername);
+        password=view.findViewById(R.id.registerPassword);
+        confirmPassword=view.findViewById(R.id.registerConfirmPassword);
+        btnRegister=view.findViewById(R.id.btnRegister);
 
-        //Click Event management
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registrationSubmit();
-            }
-        });
+        //Click Event management (not finished)
+        btnRegister.setOnClickListener(v -> registrationSubmit());
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.register), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        return view;
     }
 
-    //Creating the logic for the register submit
+    //Creating the logic for the register submit (not finished)
     private void registrationSubmit(){
         String usernametxt=username.getText().toString().trim();
         String passwordtxt=password.getText().toString().trim();
@@ -58,18 +51,17 @@ public class RegisterFragment extends Fragment {
 
         //Check for empty inputs
         if (usernametxt.isEmpty()|| passwordtxt.isEmpty() || confirmPasswordtxt.isEmpty()){
-            Toast.makeText(this, "Compilare tutti i campi", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Compilare tutti i campi", Toast.LENGTH_SHORT).show();
             return;
         }
         //Check that the passwords match
         if (!passwordtxt.equals(confirmPasswordtxt)){
-            Toast.makeText(this, "ATTENZIONE! Le password non coincidono.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "ATTENZIONE! Le password non coincidono.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         //If all succeded
-        Toast.makeText(this, "Registrazione riuscita per: " + usernametxt, Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "Registrazione riuscita per: " + usernametxt, Toast.LENGTH_LONG).show();
     }
 
 }
-*/
