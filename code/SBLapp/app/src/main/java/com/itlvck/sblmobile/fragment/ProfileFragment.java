@@ -56,18 +56,18 @@ public class ProfileFragment extends Fragment {
     //Method to navigate to the lists
     private void navigateToListsFragment() {
         ListsFragment listsFragment = new ListsFragment();
-        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, listsFragment);
-        transaction.addToBackStack(null); // u can turn back with the "back" Button
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 
     //Method to navigate to the books (it doesn't work)
     private void navigateToBooksFragment() {
         BooksFragment booksFragment = new BooksFragment();
-        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, booksFragment);
-        transaction.addToBackStack(null); // u can turn back with the "back" Button
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 

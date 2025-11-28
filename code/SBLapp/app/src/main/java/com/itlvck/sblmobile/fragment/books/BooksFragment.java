@@ -22,7 +22,7 @@ public class BooksFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         //Here it goes the layout of the fragment
-        View view = inflater.inflate(R.layout.fragment_lists, container, false);
+        View view = inflater.inflate(R.layout.fragment_books, container, false);
 
         //Initialisation variables
         btnBackToProfile = view.findViewById(R.id.btnBackToProfile);
