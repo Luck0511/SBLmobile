@@ -12,10 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.itlvck.sblmobile.R;
+import com.itlvck.sblmobile.fragment.books.BooksFragment;
 
 public class ProfileFragment extends Fragment {
     //Variables
     private ImageButton btnGoToLists;
+    private ImageButton btnGoToBooks;
 
     public ProfileFragment(){
     }
@@ -30,12 +32,21 @@ public class ProfileFragment extends Fragment {
 
         //Initialisation variables
         btnGoToLists = view.findViewById(R.id.btnGoToLists); //Initializing GoToLists Button
+        btnGoToBooks = view.findViewById(R.id.btnGoToBooks); //Initializing GoToBooks Button
 
         //Click Event management
+        // Go to Lists (finished)
         btnGoToLists.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 navigateToListsFragment();
+            }
+        });
+        // Go to Books (it doesn't work)
+        btnGoToBooks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToBooksFragment();
             }
         });
 
@@ -47,6 +58,15 @@ public class ProfileFragment extends Fragment {
         ListsFragment listsFragment = new ListsFragment();
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, listsFragment);
+        transaction.addToBackStack(null); // u can turn back with the "back" Button
+        transaction.commit();
+    }
+
+    //Method to navigate to the books (it doesn't work)
+    private void navigateToBooksFragment() {
+        BooksFragment booksFragment = new BooksFragment();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, booksFragment);
         transaction.addToBackStack(null); // u can turn back with the "back" Button
         transaction.commit();
     }
