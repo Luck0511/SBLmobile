@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,6 +20,7 @@ public class LoginFragment extends Fragment {
     private EditText username;
     private EditText password;
     private Button btnLogin;
+    private TextView goToRegister;
 
     public LoginFragment(){
     }
@@ -35,10 +38,21 @@ public class LoginFragment extends Fragment {
         username = view.findViewById(R.id.logUsername);
         password = view.findViewById(R.id.logPassword);
         btnLogin = view.findViewById(R.id.btnLogin);
+        goToRegister=view.findViewById(R.id.goToRegister);
 
-        //Click Event management (not finished)
+        //Click Event management
+        //Submit Login (not finished)
         btnLogin.setOnClickListener(v -> loginSubmit());
 
+        // Go to Register (finished)
+        goToRegister.setOnClickListener(v -> {
+            RegisterFragment registerFragment = new RegisterFragment();
+
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.auth_content_container, registerFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
         return view;
     }
 

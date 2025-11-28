@@ -57,12 +57,14 @@
         android:padding="8dp" />
 
     <TextView
-        android:id="@+id/GoToLogin"
+        android:id="@+id/goToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Accedi"
         android:textColor="?attr/colorPrimary"
         android:clickable="true"
-        android:focusable="true" />
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp" />
 
 </LinearLayout>
