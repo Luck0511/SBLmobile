@@ -20,7 +20,7 @@ Book.init(
         type: DataTypes.STRING(255),
         allowNull: true,
     },
-    titolo: {
+    title: {
         type: DataTypes.STRING(255),
         allowNull: true,
     },
