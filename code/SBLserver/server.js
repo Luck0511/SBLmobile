@@ -5,7 +5,7 @@ dotenv.config();
 import {server} from './src/app.js';
 import {appConfig} from "./src/config/config.js";
 import {testConnection} from "./src/config/dbConfig.js";
-import {initialNYTBooksFetch} from "./src/services/bookService.js";
+import {NYTBooksFetch} from "./src/services/bookService.js";
 
 const startServer = async () => {
     try{
@@ -17,7 +17,7 @@ const startServer = async () => {
         console.log('✅ Database checks ended');
 
         //initial NYT book fetch
-        const result =await initialNYTBooksFetch();
+        const result =await NYTBooksFetch();
         if(!result){
             console.error('❌ Initial NYT book fetch failed');
         }else {

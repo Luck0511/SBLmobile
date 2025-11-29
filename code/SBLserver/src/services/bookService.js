@@ -87,7 +87,7 @@ const saveListToCache = async (list, destination) => {
 }
 
 //call nyt api for bestsellers
-export const initialNYTBooksFetch = async () => {
+export const NYTBooksFetch = async () => {
     if(!NYTapiKey){
         console.error("NYT API key not set in environment variables.");
         return false;
