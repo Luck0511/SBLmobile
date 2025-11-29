@@ -3,6 +3,7 @@ import express from "express";
 
 //services imports
 import {baseUserValidation, loginUser, registerNewUser} from "../services/userService.js";
+import {bestFictionCache, bestNonFictionCache} from "../services/bookService.js";
 
 //set up a router to manage all endpoints
 const router = express.Router();
@@ -125,6 +126,16 @@ router.post('/login',async (req, res) => {
             return res.status(520).json({message: 'Generic unknown error'});
         }
     }
+})
+
+router.get('/getTrending', (req, res) => {
+    res.status(200).json({
+        trending: {
+            fiction: bestFictionCache,
+            nonfiction: bestNonFictionCache,
+            unifiedList: [...bestFictionCache, ...bestNonFictionCache],
+        }
+    })
 })
 
 //export the router to be used in app.js

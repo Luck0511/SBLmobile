@@ -8,9 +8,9 @@ const GoogleBooksApiKey = process.env.GOOGLE_BOOKS_API_KEY;
 const fictionBest= `https://api.nytimes.com/svc/books/v3/lists/combined-print-and-e-book-fiction.json?published_date=current&api-key=${NYTapiKey}`;
 const nonfictionBest= `https://api.nytimes.com/svc/books/v3/lists/combined-print-and-e-book-nonfiction.json?published_date=current&api-key=${NYTapiKey}`;
 
-//saves Db indexes for bestsellers caching
-let bestFictionCache = [];
-let bestNonFictionCache = [];
+//saves Db values for bestsellers caching
+export let bestFictionCache = [];
+export let bestNonFictionCache = [];
 
 /**
  * Execute a query searching for a book by its registered isbn code, if it doesnt exist fetch from google books api and store it in the db
@@ -77,7 +77,7 @@ export const getBookByIsbnAPI = async (isbn) => {
  **/
 const saveListToCache = async (list, destination) => {
     //clear cache if not empty
-    if(destination.length != 0){
+    if(destination.length !== 0){
         destination = [];
     }
     //save books of given list
