@@ -17,8 +17,12 @@ const startServer = async () => {
         console.log('✅ Database checks ended');
 
         //initial NYT book fetch
-        await initialNYTBooksFetch();
-        console.log('✅ Initial NYT book fetch ended');
+        const result =await initialNYTBooksFetch();
+        if(!result){
+            console.error('❌ Initial NYT book fetch failed');
+        }else {
+            console.log('✅ Initial NYT book fetch ended');
+        }
 
         //start server
         server.listen(appConfig.app.port, ()=>{
