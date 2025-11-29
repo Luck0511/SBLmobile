@@ -9,6 +9,7 @@ const fictionBest= `https://api.nytimes.com/svc/books/v3/lists/combined-print-an
 const nonfictionBest= `https://api.nytimes.com/svc/books/v3/lists/combined-print-and-e-book-nonfiction.json?published_date=current&api-key=${NYTapiKey}`;
 
 //saves Db values for bestsellers caching
+export let lastUpdated = "";
 export let bestFictionCache = [];
 export let bestNonFictionCache = [];
 
@@ -101,7 +102,10 @@ export const NYTBooksFetch = async () => {
     }
     try {
         const [fictionResponse, nonfictionResponse] = await Promise.all([
-            axios.get(fictionBest).then(res => res.data.results.books),
+            axios.get(fictionBest).then(res => {
+                lastUpdated = res.data.results.bestsellers_date
+                return res.data.results.books
+            }),
             axios.get(nonfictionBest).then(res => res.data.results.books),
         ]);
         //saving to cache

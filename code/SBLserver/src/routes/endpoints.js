@@ -3,7 +3,7 @@ import express from "express";
 
 //services imports
 import {baseUserValidation, loginUser, registerNewUser} from "../services/userService.js";
-import {bestFictionCache, bestNonFictionCache} from "../services/bookService.js";
+import {bestFictionCache, bestNonFictionCache, lastUpdated} from "../services/bookService.js";
 
 //set up a router to manage all endpoints
 const router = express.Router();
@@ -128,9 +128,17 @@ router.post('/login',async (req, res) => {
     }
 })
 
+/**
+ * #### Endpoint that returns cached books
+ * GET /api/getTrending
+ *
+ * Responses:
+ * - 200 : object containing: bestseller_date, fiction, nonFiction, unifiedList of books
+ **/
 router.get('/getTrending', (req, res) => {
     res.status(200).json({
         trending: {
+            bestsellers_date: lastUpdated,
             fiction: bestFictionCache,
             nonfiction: bestNonFictionCache,
             unifiedList: [...bestFictionCache, ...bestNonFictionCache],
