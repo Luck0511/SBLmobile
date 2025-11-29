@@ -76,11 +76,18 @@ export const getBookByIsbnAPI = async (isbn) => {
  * @returns {Promise<void>}
  **/
 const saveListToCache = async (list, destination) => {
+    //clear cache if not empty
+    if(destination.length != 0){
+        destination = [];
+    }
+    //save books of given list
     for (const book of list) {
+        //search for existing book first (if not found automatically created)
         const genicDBBook = await getBookByIsbnDB(book.primary_isbn13);
+        //if it exists add it to the cache
         if (genicDBBook) {
-            destination.push(genicDBBook.bookID);
-        }else{
+            destination.push(genicDBBook.dataValues);
+        } else {
             console.error(`Book with ISBN ${book.primary_isbn13} could not be found or created in DB.`);
         }
     }
@@ -100,8 +107,6 @@ export const NYTBooksFetch = async () => {
         //saving to cache
         await saveListToCache(fictionResponse, bestFictionCache);
         await saveListToCache(nonfictionResponse, bestNonFictionCache);
-        console.table(bestFictionCache);
-        console.table(bestNonFictionCache);
     } catch (error) {
         console.error("Error fetching NYT Bestseller Lists:", error);
         return false;
