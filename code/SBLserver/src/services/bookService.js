@@ -8,6 +8,10 @@ const GoogleBooksApiKey = process.env.GOOGLE_BOOKS_API_KEY;
 const fictionBest= `https://api.nytimes.com/svc/books/v3/lists/combined-print-and-e-book-fiction.json?published_date=current&api-key=${NYTapiKey}`;
 const nonfictionBest= `https://api.nytimes.com/svc/books/v3/lists/combined-print-and-e-book-nonfiction.json?published_date=current&api-key=${NYTapiKey}`;
 
+//saves Db indexes for bestsellers caching
+let bestFictionCache = [];
+let bestNonFictionCache = [];
+
 /**
  * Execute a query searching for a book by its registered isbn code, if it doesnt exist fetch from google books api and store it in the db
  * @param {String} isbn registered isbn code
@@ -65,26 +69,39 @@ export const getBookByIsbnAPI = async (isbn) => {
     }
 }
 
+/**
+ * Saves the list of books to the provided destination cache array
+ * @param {Array} list list of books from NYT api
+ * @param {Array} destination destination cache array
+ * @returns {Promise<void>}
+ **/
+const saveListToCache = async (list, destination) => {
+    for (const book of list) {
+        const genicDBBook = await getBookByIsbnDB(book.primary_isbn13);
+        if (genicDBBook) {
+            destination.push(genicDBBook.bookID);
+        }else{
+            console.error(`Book with ISBN ${book.primary_isbn13} could not be found or created in DB.`);
+        }
+    }
+}
+
 //call nyt api for bestsellers
 export const initialNYTBooksFetch = async () => {
     if(!NYTapiKey){
         console.error("NYT API key not set in environment variables.");
         return false;
     }
-
     try {
         const [fictionResponse, nonfictionResponse] = await Promise.all([
             axios.get(fictionBest).then(res => res.data.results.books),
             axios.get(nonfictionBest).then(res => res.data.results.books),
         ]);
-        //merging both lists
-        const allBooks = [...fictionResponse, ...nonfictionResponse];
-        //iterating over all books
-        for (const nytData of allBooks) {
-            //this allows to search in db and if not found fetch from google books api and store it in the db
-            await getBookByIsbnDB(nytData.primary_isbn13);
-        }
-
+        //saving to cache
+        await saveListToCache(fictionResponse, bestFictionCache);
+        await saveListToCache(nonfictionResponse, bestNonFictionCache);
+        console.table(bestFictionCache);
+        console.table(bestNonFictionCache);
     } catch (error) {
         console.error("Error fetching NYT Bestseller Lists:", error);
         return false;
