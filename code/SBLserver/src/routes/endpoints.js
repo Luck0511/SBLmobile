@@ -3,7 +3,7 @@ import express from "express";
 
 //services imports
 import {baseUserValidation, loginUser, registerNewUser} from "../services/userService.js";
-import {bestFictionCache, bestNonFictionCache, lastUpdated} from "../services/bookService.js";
+import {bestFictionCache, bestNonFictionCache, getBookByParam, lastUpdated} from "../services/bookService.js";
 
 //set up a router to manage all endpoints
 const router = express.Router();
@@ -144,6 +144,30 @@ router.get('/getTrending', (req, res) => {
             unifiedList: [...bestFictionCache, ...bestNonFictionCache],
         }
     })
+})
+
+/**
+ * #### Endpoint to return a specific book
+ * GET /api/searchBook
+ *
+ * Query Params:
+ * - query: the input of the search bar
+ *
+ * Responses:
+ * - 200 : object containing the books matching the query
+ **/
+router.get('/searchBook', async (req, res) => {
+    const queries = req.query;
+    try{
+        const status = await getBookByParam(queries);
+        res.status(status.opStatus).json({
+            ...(status.message && { message: status.message }),
+            ...(status.books && { books: status.books })
+        })
+    }catch(err){
+        console.error(err);
+        res.status(500).json({message: 'There was an internal server error'});
+    }
 })
 
 //export the router to be used in app.js
