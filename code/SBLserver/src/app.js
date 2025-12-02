@@ -20,10 +20,3 @@ app.use(cors(corsOptions)); //allow cross-origin request, mainly for localhost t
 app.use(cookieParser()) //parse cookies from requests-response
 app.use(express.json()); //parse JSON from requests-response
 app.use('/api', router); //router mounting allowing access to API endpoints
-
-// example root api --> returns a JSON object with a message
-app.get('/', (req, res) => {
-    res.json({
-        message : "Sbl server is running and responsive!",
-    });
-});

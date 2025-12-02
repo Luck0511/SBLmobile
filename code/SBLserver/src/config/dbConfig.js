@@ -14,7 +14,7 @@ const buildURI = ()=>{
     const host = appConfig.database.host; //DB host --> where the DB is located
     const port = appConfig.database.port; //DB port --> port to connect to DB
     const database = appConfig.database.database; //DB name
-
+    console.log(`${dialect}://${username}:${password}@${host}:${port}/${database}`);
     return `${dialect}://${username}:${password}@${host}:${port}/${database}`;
 }
 
@@ -28,14 +28,6 @@ export const sequelize = new Sequelize(
         logging: appConfig.database.logging,
         pool: appConfig.database.pool,
         define: appConfig.database.define,
-        ...(appConfig.database.dialect === 'postgres' && {
-            dialectOptions: {
-                ssl: {
-                    require: true,
-                    rejectUnauthorized: false
-                }
-            }
-        })
     }
 );
 

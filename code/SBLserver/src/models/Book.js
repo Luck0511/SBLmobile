@@ -20,7 +20,7 @@ Book.init(
         type: DataTypes.STRING(255),
         allowNull: true,
     },
-    titolo: {
+    title: {
         type: DataTypes.STRING(255),
         allowNull: true,
     },
@@ -29,7 +29,7 @@ Book.init(
         allowNull: true,
     },
     description: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(4000),
         allowNull: true,
     },
     publication_year:{
