@@ -87,7 +87,7 @@ public class LoginFragment extends Fragment {
         btnLogin.setEnabled(false);
         Toast.makeText(getActivity(), "Accesso in corso...", Toast.LENGTH_SHORT).show();
         //Create the request
-        LoginRequest request = new LoginRequest(username, password);
+        LoginRequest request = new LoginRequest(logUsername, logPassword);
 
         RetrofitClient.getInstance()
                 .getApiService()
