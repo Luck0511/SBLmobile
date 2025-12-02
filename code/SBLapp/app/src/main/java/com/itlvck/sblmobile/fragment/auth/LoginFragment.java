@@ -86,6 +86,7 @@ public class LoginFragment extends Fragment {
         // Disable btnLogin during the login process
         btnLogin.setEnabled(false);
         Toast.makeText(getActivity(), "Accesso in corso...", Toast.LENGTH_SHORT).show();
+
         //Create the request
         LoginRequest request = new LoginRequest(logUsername, logPassword);
 
@@ -149,8 +150,8 @@ public class LoginFragment extends Fragment {
     }
 
     private void navigateToMainApp() {
-       Intent homeFragment = new Intent(getContext(), MainActivity.class);
-       startActivity(homeFragment);
+        Intent homeFragment = new Intent(getContext(), MainActivity.class);
+        startActivity(homeFragment);
     }
 
     private void showToast(String message) {

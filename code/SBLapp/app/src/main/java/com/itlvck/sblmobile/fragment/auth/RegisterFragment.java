@@ -50,10 +50,10 @@ public class RegisterFragment extends Fragment {
         goToLogin = view.findViewById(R.id.goToLogin);
 
         //Click Event management
-        //Submit Registration (not finished)
+        //Submit Registration
         btnRegister.setOnClickListener(v -> registrationSubmit());
 
-        // Go to Login (finished)
+        // Go to Login
         goToLogin.setOnClickListener(v -> {
             LoginFragment loginFragment = new LoginFragment();
 
