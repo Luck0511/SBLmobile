@@ -55,7 +55,7 @@ router.post('/register', async (req, res) => {
                 message: 'User profile created successfully',
                 userInfo: {
                     id: newUser.get('userID'),
-                    playerName: newUser.get('username'),
+                    userName: newUser.get('username'),
                 }
             });
         }
@@ -104,9 +104,9 @@ router.post('/login',async (req, res) => {
         case 200: {
             return res.status(200).json({
                 message: 'User logged in successfully',
-                playerInfo: {
+                userInfo: {
                     id: loggedUser.userID,
-                    playerName: loggedUser.username,
+                    userName: loggedUser.username,
                 }
             });
         }
