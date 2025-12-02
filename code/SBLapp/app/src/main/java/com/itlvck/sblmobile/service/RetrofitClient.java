@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 
 public class RetrofitClient {
-    private static final String BASE_URL = ""; // Change URL
+    private static final String BASE_URL = "http://10.224.146.81:3000"; // Change URL
     private static RetrofitClient instance;
     private ApiServicies apiServices;
 

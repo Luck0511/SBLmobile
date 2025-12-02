@@ -1,5 +1,6 @@
 package com.itlvck.sblmobile.fragment.auth;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.gson.Gson;
 import com.itlvck.sblmobile.R;
+import com.itlvck.sblmobile.activity.MainActivity;
 import com.itlvck.sblmobile.dto.ErrorResponse;
 import com.itlvck.sblmobile.dto.LoginRequest;
 import com.itlvck.sblmobile.dto.LoginResponse;
@@ -147,11 +149,8 @@ public class LoginFragment extends Fragment {
     }
 
     private void navigateToMainApp() {
-        HomeFragment homeFragment = new HomeFragment();
-        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.auth_content_container, homeFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+       Intent homeFragment = new Intent(getContext(), MainActivity.class);
+       startActivity(homeFragment);
     }
 
     private void showToast(String message) {

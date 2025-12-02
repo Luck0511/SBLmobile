@@ -87,7 +87,7 @@ public class RegisterFragment extends Fragment {
 
 
         //Create the request
-        RegisterRequest request = new RegisterRequest(username, password);
+        RegisterRequest request = new RegisterRequest(usernametxt, passwordtxt);
 
         RetrofitClient.getInstance()
                 .getApiService()
