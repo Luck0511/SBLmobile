@@ -35,14 +35,14 @@ public class ProfileFragment extends Fragment {
         btnGoToBooks = view.findViewById(R.id.btnGoToBooks); //Initializing GoToBooks Button
 
         //Click Event management
-        // Go to Lists (finished)
+        // Go to Lists
         btnGoToLists.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 navigateToListsFragment();
             }
         });
-        // Go to Books (it doesn't work)
+        // Go to Books
         btnGoToBooks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,7 @@ public class ProfileFragment extends Fragment {
         transaction.commit();
     }
 
-    //Method to navigate to the books (it doesn't work)
+    //Method to navigate to the books
     private void navigateToBooksFragment() {
         BooksFragment booksFragment = new BooksFragment();
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
