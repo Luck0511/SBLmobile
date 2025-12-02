@@ -22,7 +22,7 @@ public interface ApiServicies {
     @POST("api/login")
     Call<LoginResponse> login(@Body LoginRequest request);
 
-    //Trending
+    //Trending & Research
     @GET("api/getTrending")
     Call<TrendingResponse> getTrending();
 

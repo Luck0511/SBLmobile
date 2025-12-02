@@ -38,7 +38,6 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         // Initialize RecycleView
         booksRecyclerView = view.findViewById(R.id.booksRecyclerView);
 
@@ -66,7 +65,7 @@ public class HomeFragment extends Fragment {
                             } else {
                                 //Any book found
                                 Toast.makeText(getContext(), "Nessun libro trend trovato.", Toast.LENGTH_SHORT).show();
-                                // initializing with empty list
+                                //Initializing with empty list
                                 bookAdapter = new BookAdapter(getContext(), Collections.emptyList());
                                 booksRecyclerView.setAdapter(bookAdapter);
                             }
