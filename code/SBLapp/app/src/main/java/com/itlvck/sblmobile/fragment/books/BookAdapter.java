@@ -14,16 +14,25 @@ import com.bumptech.glide.Glide;
 import com.itlvck.sblmobile.R;
 import com.itlvck.sblmobile.dto.BookItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     //Variables
-    private final List<BookItem> bookList;
+    private List<BookItem> bookList;
     private final Context context;
 
     public BookAdapter(Context context, List<BookItem> bookList) {
         this.context = context;
-        this.bookList = bookList;
+        this.bookList = new ArrayList<>(bookList);
+    }
+
+    public void updateList(List<BookItem> newList) {
+        this.bookList.clear();
+        if (newList != null) {
+            this.bookList.addAll(newList);
+        }
+        notifyDataSetChanged();
     }
 
     @Override
@@ -44,7 +53,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         //Cover Image
         Glide.with(context)
                 .load(book.getCoverImageUrl())
-                .placeholder(R.drawable.books) // Immagine di fallback temporanea
+                .placeholder(R.drawable.books)
                 .into(holder.bookCoverImage);
 
     }
@@ -57,7 +66,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public static class BookViewHolder extends RecyclerView.ViewHolder {
         final TextView bookTitle;
         final ImageView bookCoverImage;
-        // final ImageView bookmarkButton; //bookmark click
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);

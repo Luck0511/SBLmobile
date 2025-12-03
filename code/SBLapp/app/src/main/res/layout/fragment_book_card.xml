@@ -14,7 +14,6 @@
         android:background="#E0E0E0"
         android:padding="12dp">
 
-        <!-- Book Cover Card -->
         <androidx.cardview.widget.CardView
             android:id="@+id/bookCoverCard"
             android:layout_width="match_parent"
@@ -30,19 +29,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!-- Book Cover Image -->
                 <ImageView
                     android:id="@+id/bookCoverImage"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:contentDescription="Book Cover"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/books"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Bookmark Button -->
+                    />
+
                 <ImageView
                     android:id="@+id/myImageButton"
                     android:layout_width="48dp"
@@ -58,7 +54,6 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!-- Book Title -->
         <TextView
             android:id="@+id/bookTitle"
             android:layout_width="match_parent"

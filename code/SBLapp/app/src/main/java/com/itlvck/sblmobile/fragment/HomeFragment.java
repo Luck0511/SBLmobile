@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,8 +15,10 @@ import com.itlvck.sblmobile.R;
 import com.itlvck.sblmobile.dto.BookItem;
 import com.itlvck.sblmobile.dto.TrendingResponse;
 import com.itlvck.sblmobile.fragment.books.BookAdapter;
+import com.itlvck.sblmobile.service.ApiServicies;
 import com.itlvck.sblmobile.service.RetrofitClient;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,20 +30,27 @@ public class HomeFragment extends Fragment {
     //Variables
     private RecyclerView booksRecyclerView;
     private BookAdapter bookAdapter;
+    private final List<BookItem> bookList = new ArrayList<>();
+    private ApiServicies apiServices;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home, container, false);
+
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Initialize RecycleView
+        apiServices = RetrofitClient.getInstance().getApiService();
+
+        // Initialization
         booksRecyclerView = view.findViewById(R.id.booksRecyclerView);
+        bookAdapter = new BookAdapter(requireContext(), bookList);
+        booksRecyclerView.setAdapter(bookAdapter);
 
         //API call
         fetchTrendingBooks();
@@ -53,32 +64,33 @@ public class HomeFragment extends Fragment {
                 .getTrending()
                 .enqueue(new Callback<TrendingResponse>() {
                     @Override
-                    public void onResponse(Call<TrendingResponse> call, Response<TrendingResponse> response) {
+                    public void onResponse(@NonNull Call<TrendingResponse> call, @NonNull Response<TrendingResponse> response) {
                         if (response.isSuccessful() && response.body() != null && response.body().getTrending() != null) {
 
+                            // Assumendo che response.body().getTrending().getUnifiedList() sia il modo corretto per ottenere la lista
                             List<BookItem> trendingBooks = response.body().getTrending().getUnifiedList();
 
                             if (trendingBooks != null && !trendingBooks.isEmpty()) {
-                                //Adding data in the RecycleView
-                                bookAdapter = new BookAdapter(getContext(), trendingBooks);
-                                booksRecyclerView.setAdapter(bookAdapter);
+                                // Adding data in the RecycleView
+                                bookAdapter.updateList(trendingBooks);
                             } else {
                                 //Any book found
                                 Toast.makeText(getContext(), "Nessun libro trend trovato.", Toast.LENGTH_SHORT).show();
-                                //Initializing with empty list
-                                bookAdapter = new BookAdapter(getContext(), Collections.emptyList());
-                                booksRecyclerView.setAdapter(bookAdapter);
+                                bookAdapter.updateList(Collections.emptyList());
                             }
                         } else {
                             // Error
                             Toast.makeText(getContext(), "Errore nel recupero dei dati: " + response.code(), Toast.LENGTH_SHORT).show();
+                            // In caso di errore, pulisci la lista
+                            bookAdapter.updateList(Collections.emptyList());
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<TrendingResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<TrendingResponse> call, @NonNull Throwable t) {
                         // Error connection
                         Toast.makeText(getContext(), "Errore di connessione: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                        bookAdapter.updateList(Collections.emptyList());
                     }
                 });
     }
