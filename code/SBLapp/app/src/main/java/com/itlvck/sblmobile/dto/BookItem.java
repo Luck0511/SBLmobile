@@ -22,7 +22,7 @@ public class BookItem {
     @SerializedName("isbn")
     private String isbn;
 
-    @SerializedName("cover_Url")
+    @SerializedName("cover_url")
     private String coverImageUrl;
 
     //getters
