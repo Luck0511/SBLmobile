@@ -13,8 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.itlvck.sblmobile.R;
@@ -24,6 +25,7 @@ import com.itlvck.sblmobile.service.ApiServicies;
 import com.itlvck.sblmobile.service.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +40,6 @@ public class ResearchFragment extends Fragment {
     private ImageButton clearButton;
     private RecyclerView booksRecyclerView;
     private BookAdapter bookAdapter;
-    private List<BookItem> bookList;
     private ApiServicies apiService;
 
     private static final String SEARCH_QUERY_KEY = "query";
@@ -46,44 +47,44 @@ public class ResearchFragment extends Fragment {
     public ResearchFragment() {
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater,
+    public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //Here it goes the layout of the fragment
-        View view = inflater.inflate(R.layout.fragment_research, container, false);
-        return view;
+        // Here it goes the layout of the fragment
+        return inflater.inflate(R.layout.fragment_research, container, false);
     }
 
     @Override
-    public void onViewCreated(View view,
-                              Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view,
+                              @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Initialisation variables (ID dal layout XML fornito)
+        // Initialisation variables
         searchEditText = view.findViewById(R.id.searchEditText);
         clearButton = view.findViewById(R.id.clearButton);
         booksRecyclerView = view.findViewById(R.id.booksRecyclerView);
 
-        // Setup RecyclerView
+        // Setup Retrofit e RecyclerView
         apiService = RetrofitClient.getInstance().getApiService();
-        bookList = new ArrayList<>();
-        bookAdapter = new BookAdapter(requireContext(), bookList);
+
+        // Adapter
+        bookAdapter = new BookAdapter(requireContext(), new ArrayList<>());
         booksRecyclerView.setAdapter(bookAdapter);
 
-        // Listeners
+        //Listeners
         setupSearchListeners();
         setupClearButton();
     }
 
 
-    //Creating the logic for the research (not finished)
     private void setupSearchListeners() {
         searchEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 performSearch();
+                InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 return true;
             }
             return false;
@@ -107,8 +108,8 @@ public class ResearchFragment extends Fragment {
     private void setupClearButton() {
         clearButton.setOnClickListener(v -> {
             searchEditText.setText("");
-            bookList.clear();
-            bookAdapter.notifyDataSetChanged();
+            bookAdapter.updateList(Collections.emptyList());
+
             InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         });
@@ -128,36 +129,27 @@ public class ResearchFragment extends Fragment {
         // API Call
         apiService.searchBooks(queries).enqueue(new Callback<BookItem.ResearchResponse>() {
             @Override
-            public void onResponse(Call<BookItem.ResearchResponse> call, Response<BookItem.ResearchResponse> response) {
+            public void onResponse(@NonNull Call<BookItem.ResearchResponse> call, @NonNull Response<BookItem.ResearchResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<BookItem> newBooks = response.body().getBooks();
-                    updateBookList(newBooks);
-                } else {
+                    bookAdapter.updateList(newBooks);
 
+                    if (newBooks == null || newBooks.isEmpty()) {
+                        Toast.makeText(getContext(), "Nessun risultato trovato", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
                     Toast.makeText(getContext(), "Errore nella ricerca: " + response.code(), Toast.LENGTH_LONG).show();
-                    updateBookList(new ArrayList<>());
+                    bookAdapter.updateList(Collections.emptyList());
                 }
             }
 
             @Override
-            public void onFailure(Call<BookItem.ResearchResponse> call, Throwable t) {
-
+            public void onFailure(@NonNull Call<BookItem.ResearchResponse> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), "Errore di connessione: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                updateBookList(new ArrayList<>());
+                bookAdapter.updateList(Collections.emptyList());
             }
         });
     }
 
-    private void updateBookList(List<BookItem> newBooks) {
-        bookList.clear();
-        if (newBooks != null && !newBooks.isEmpty()) {
-            bookList.addAll(newBooks);
-        } else if (searchEditText.getText().length() > 0) {
-            Toast.makeText(getContext(), "Nessun risultato trovato", Toast.LENGTH_SHORT).show();
-        }
-
-        bookAdapter.notifyDataSetChanged();
-    }
 }
-
-

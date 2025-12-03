@@ -37,12 +37,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/booksRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2"
+                android:padding="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/fragment_book_card" />
         </LinearLayout>
     </ScrollView>

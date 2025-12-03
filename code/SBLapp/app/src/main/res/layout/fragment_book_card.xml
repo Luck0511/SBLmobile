@@ -31,12 +31,8 @@
 
                 <ImageView
                     android:id="@+id/bookCoverImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="Book Cover"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/books"
-
+                    android:layout_width="match_parent"    android:layout_height="match_parent"   android:contentDescription="Book Cover"
+                    android:scaleType="centerCrop"         android:src="@drawable/books"
                     />
 
                 <ImageView

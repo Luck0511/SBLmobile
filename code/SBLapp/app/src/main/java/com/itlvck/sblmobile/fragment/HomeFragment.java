@@ -30,7 +30,6 @@ public class HomeFragment extends Fragment {
     //Variables
     private RecyclerView booksRecyclerView;
     private BookAdapter bookAdapter;
-    private final List<BookItem> bookList = new ArrayList<>();
     private ApiServicies apiServices;
 
 
@@ -49,8 +48,9 @@ public class HomeFragment extends Fragment {
 
         // Initialization
         booksRecyclerView = view.findViewById(R.id.booksRecyclerView);
-        bookAdapter = new BookAdapter(requireContext(), bookList);
+        bookAdapter = new BookAdapter(requireContext(), new ArrayList<>());
         booksRecyclerView.setAdapter(bookAdapter);
+        booksRecyclerView.setHasFixedSize(false);
 
         //API call
         fetchTrendingBooks();
@@ -67,7 +67,6 @@ public class HomeFragment extends Fragment {
                     public void onResponse(@NonNull Call<TrendingResponse> call, @NonNull Response<TrendingResponse> response) {
                         if (response.isSuccessful() && response.body() != null && response.body().getTrending() != null) {
 
-                            // Assumendo che response.body().getTrending().getUnifiedList() sia il modo corretto per ottenere la lista
                             List<BookItem> trendingBooks = response.body().getTrending().getUnifiedList();
 
                             if (trendingBooks != null && !trendingBooks.isEmpty()) {
