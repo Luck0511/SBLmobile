@@ -6,6 +6,7 @@ Con la creazione di un profilo, l’utente potrà inoltre salvare i propri libri
 
 
 DISCLAIMER: this repo contains both server and android app source code!!
+
 ---
 ### Creators:
 - Natalia Busuioc
