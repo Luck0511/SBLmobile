@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:text="REGISTRATI"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="24sp" />
+
+    <EditText
+        android:hint="Username"
+        android:id="@+id/registerUsername"
+        android:layout_width="320dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="16dp"
+        android:paddingStart="16dp"
+        android:inputType="text"
+        android:drawableStart="@drawable/user_icon" />
+
+    <EditText
+        android:hint="Password"
+        android:id="@+id/registerPassword"
+        android:layout_width="320dp"
+        android:paddingStart="16dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="16dp"
+        android:inputType="textPassword"
+        android:drawableStart="@drawable/password_icon" />
+
+    <EditText
+        android:hint="Conferma Password"
+        android:id="@+id/registerConfirmPassword"
+        android:layout_width="320dp"
+        android:paddingStart="16dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="16dp"
+        android:inputType="textPassword"
+        android:drawableStart="@drawable/password_icon" />
+
+    <Button
+        android:text="Registrati"
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sei già registrato?"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/goToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accedi"
+        android:textColor="?attr/colorPrimary"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp" />
+
+</LinearLayout>
