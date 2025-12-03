@@ -11,8 +11,7 @@ export const server = createServer(app);
 
 //cors options for express (allows cross-origin requests)
 const corsOptions = {
-    origin: ["http://localhost:5173", "http://localhost:5174", "http://localhost:5175"], // allow Vite dev servers
-    credentials: true //allows cookies to be sent within CORS requests
+    origin: "*"
 }
 
 // middleware --> all request and responses pass here before
