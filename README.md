@@ -7,6 +7,8 @@ Con la creazione di un profilo, l’utente potrà inoltre salvare i propri libri
 
 DISCLAIMER: this repo contains both server and android app source code!!
 
+public link for presentation: [presentation](https://www.canva.com/design/DAG6cMPmPHc/gfZRRaCAm5-ZnoOotLo8KA/view?utm_content=DAG6cMPmPHc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h524d3b8654)
+
 ---
 ### Creators:
 - Natalia Busuioc
